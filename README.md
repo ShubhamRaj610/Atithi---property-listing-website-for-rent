@@ -1,4 +1,4 @@
-# 🌍 Atithi — Airbnb Clone (MERN Stack)
+# 🌍 Atithi — House Accomodation Platform (MERN Stack)
 
 A full-stack Airbnb-inspired web application where users can explore, create, and manage travel listings.  
 This project demonstrates real-world backend architecture, RESTful APIs, authentication, and responsive UI design.
