@@ -13,14 +13,23 @@
       </div>
 
 
-      <div class="btns ms-auto">
+<div class="search-container">
+  <form action="/listings" method="GET" class="search-form">
+    
+    <input 
+      type="text" 
+      name="search" 
+      placeholder="Where are you going?" 
+      class="search-input"
+      required
+    />
 
-        <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search"/>
-      <button class="btn" style="background-color: darkorange;" type="submit">Search</button>
-    </form>
+    <button type="submit" class="search-btn">
+      🔍
+    </button>
 
-      </div>
+  </form>
+</div>
 
 
       <div class="navbar-nav ms-auto ">

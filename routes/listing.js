@@ -20,10 +20,31 @@ const validateListing = (req,res,next)=>{
 };
 
 //Index Route
-router.get("/",wrapAsync(async (req, res,next) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
-}));
+router.get("/", async (req, res) => {
+  try {
+    const search = req.query.search?.trim();
+
+    let query = {};
+
+    if (search && search.length > 0) {
+      query = {
+        $or: [
+          { location: { $regex: search, $options: "i" } },
+          { country: { $regex: search, $options: "i" } },
+          { title: { $regex: search, $options: "i" } }
+        ]
+      };
+    }
+
+    const allListings = await Listing.find(query);
+
+    res.render("listings/index.ejs", { allListings });
+
+  } catch (err) {
+    console.log(err);
+    res.send("Error");
+  }
+});
 
 //New Route
 router.get("/new", isLoggedIn,(req, res) => {

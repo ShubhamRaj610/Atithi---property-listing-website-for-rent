@@ -106,3 +106,50 @@ body{
 .btns{
     display: flex;
 }
+
+/*search bar*/
+
+/* Center the search bar */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  padding-left: 28%;
+}
+
+/* Form styling */
+.search-form {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 50px;
+  padding: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Input field */
+.search-input {
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  width: 250px;
+}
+
+/* Button */
+.search-btn {
+  background-color: darkorange; 
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.search-btn:hover {
+  background-color: darkorange;
+}
