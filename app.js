@@ -9,7 +9,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const aiRoutes = require("./routes/ai");
+const aiRoutes = require("./routes/ai.js");
 
 
 const wrapAsync = require("./utils/wrapAsync.js");
