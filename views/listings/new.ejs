@@ -1,4 +1,243 @@
-<% layout("/layouts/boilerplate")  %>
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+
+        <h3>Create a New Listing</h3>
+
+        <br><br>
+
+        <form method="POST" action="/listings" novalidate class="needs-validation">
+
+            <!-- TITLE -->
+            <div class="mb-3">
+
+                <label for="title" class="form-label">
+                    Title
+                </label>
+
+                <input
+                    id="title"
+                    name="listing[title]"
+                    placeholder="Enter title"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+
+                <label for="description" class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="listing[description]"
+                    placeholder="Enter description"
+                    class="form-control"
+                    required
+                ></textarea>
+
+                <!-- AI BUTTON -->
+                <button
+                    type="button"
+                    id="generate-ai"
+                    class="btn btn-outline-info mt-2"
+                >
+                    Generate Description with AI
+                </button>
+
+            </div>
+
+            <!-- IMAGE -->
+            <div class="mb-3">
+
+                <label for="image" class="form-label">
+                    Image Link
+                </label>
+
+                <input
+                    name="listing[image]"
+                    placeholder="Enter image URL/Link"
+                    type="text"
+                    class="form-control"
+                >
+
+            </div>
+
+            <div class="row">
+
+                <!-- PRICE -->
+                <div class="mb-3 col-4">
+
+                    <label for="price" class="form-label">
+                        Price
+                    </label>
+
+                    <input
+                        id="price"
+                        name="listing[price]"
+                        placeholder="Enter price"
+                        type="number"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+                <!-- COUNTRY -->
+                <div class="mb-3 col-8">
+
+                    <label for="country" class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        id="country"
+                        name="listing[country]"
+                        placeholder="Enter country"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- LOCATION -->
+            <div class="mb-3">
+
+                <label for="location" class="form-label">
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    name="listing[location]"
+                    placeholder="Enter location"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <br>
+
+            <!-- SUBMIT BUTTON -->
+            <button class="btn btn-dark offset-10 mt-3">
+                Add
+            </button>
+
+            <br><br>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- AI SCRIPT -->
+
+<script>
+
+document
+.getElementById("generate-ai")
+.addEventListener("click", async () => {
+
+    const title =
+        document.getElementById("title").value;
+
+    const location =
+        document.getElementById("location").value;
+
+    const country =
+        document.getElementById("country").value;
+
+    const price =
+        document.getElementById("price").value;
+
+    try {
+
+        const response = await fetch(
+            "/ai/generate-description",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+                    title,
+                    location,
+                    country,
+                    price
+                })
+
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (data.success) {
+
+            document
+            .getElementById("description")
+            .value = data.description;
+
+        } else {
+
+            alert("AI generation failed");
+
+        }
+
+    } catch (err) {
+
+        console.log(err);
+
+        alert("Something went wrong");
+
+    }
+
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <% layout("/layouts/boilerplate")  %>
 <div class="row mt-3">
     <div class="col-8 offset-2">
     <h3>Create a New Listing</h3>
@@ -65,4 +304,4 @@
 <br><br>
     </form>
 </div>
-</div>
+</div> -->

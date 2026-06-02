@@ -11,20 +11,15 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const aiRoutes = require("./routes/ai.js");
 
-
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema } = require("./schema.js");
 const User = require("./models/user.js");
 const Listing = require("./models/listing.js"); 
 
-
 const listingRouter = require("./routes/listing.js");
 const userRouter = require("./routes/user.js");
 
-
-
-//const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
 
 main()
@@ -79,7 +74,6 @@ app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.current = req.user;
-  
   next();
 });
 
@@ -89,43 +83,14 @@ app.get("/", (req, res) => {
 });
 
 app.use("/listings", listingRouter);
-app.use("/", userRouter);
-
-// app.get("/demouser", async (req, res) => {
-//   try {
-//     const fakeUser = new User({
-//       email: "raman10@gmail.com",
-//       username: "Raman10",
-//     });
-//     const registeredUser = await User.register(fakeUser, "Hello");
-//     res.send(registeredUser);
-//   } catch (err) {
-//     res.send(err.message);
-//   }
-// });
-
-// app.get("/demouser",async(req,res)=>{
-//   let fakeUser = new User({
-//     email:"student@gmail.com",
-//     username: "delta-student",
-//   }) ;
-  
-//   let registeredUser = await User.register(fakeUser,"helloworld");
-//   res.send(registeredUser);
-// });
-
-app.use("/listings", listingRouter);
 app.use("/", userRouter); 
 
-
 // 7. Error Handling
-// Use a named parameter (like 'path') with the wildcard
-// Remove the string path entirely. 
-// Express will apply this middleware to EVERY request that reaches this point.
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
+// THIS CATCH-ALL ERROR HANDLER WAS MISSING:
 app.use((err, req, res, next) => {
   let { status = 500, message = "Something went wrong" } = err;
   res.status(status).render("error.ejs", { message , err });
@@ -136,54 +101,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`server is listening to port ${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
